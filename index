@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explorando o Som</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #1e1e1e;
+            color: white;
+            padding: 20px;
+        }
+        .section {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #333;
+            border-radius: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+            background-color: #ff9800;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Explorando o Som</h1>
+    <div class="section">
+        <h2>O que é o Som?</h2>
+        <p>O som é uma onda mecânica que se propaga através de um meio, como o ar ou a água.</p>
+    </div>
+    <div class="section">
+        <h2>Experimente a Frequência</h2>
+        <p>Clique no botão para ouvir um som com frequência diferente.</p>
+        <button onclick="playSound(440)">Tocar 440 Hz</button>
+        <button onclick="playSound(880)">Tocar 880 Hz</button>
+    </div>
+    <script>
+        function playSound(frequency) {
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioCtx.createOscillator();
+            oscillator.type = "sine";
+            oscillator.frequency.setValueAtTime(frequency, audioCtx.currentTime);
+            oscillator.connect(audioCtx.destination);
+            oscillator.start();
+            setTimeout(() => oscillator.stop(), 1);
+        }
+    </script>
+</body>
+</html>
